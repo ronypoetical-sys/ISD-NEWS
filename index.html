@@ -4,16 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%23C41E3A'/><text y='.9em' font-size='60' x='50' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold'>I</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Primary SEO -->
     <title>ISD NEWS — Portal Berita Terpercaya Indonesia</title>
     <meta name="description" content="ISD NEWS - Portal berita terpercaya, aktual, dan menginspirasi. Sajikan informasi terkini dari seluruh penjuru Indonesia dan dunia." />
     <meta name="keywords" content="berita indonesia, portal berita, berita terkini, berita nasional, ISD NEWS" />
     <meta name="author" content="Imam Sahroni Darmawan, S.T" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://isdnews.com/" />
-
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://isdnews.com/" />
     <meta property="og:title" content="ISD NEWS — Portal Berita Terpercaya Indonesia" />
@@ -21,39 +17,22 @@
     <meta property="og:image" content="https://isdnews.com/og-image.jpg" />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:site_name" content="ISD NEWS" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ISD NEWS — Portal Berita Terpercaya Indonesia" />
     <meta name="twitter:description" content="Menyajikan berita terkini dan jurnalisme berkualitas untuk masyarakat Indonesia." />
     <meta name="twitter:image" content="https://isdnews.com/og-image.jpg" />
-
-    <!-- PWA / Mobile -->
     <meta name="theme-color" content="#C41E3A" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="ISD NEWS" />
-
-    <!-- Schema.org -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsMediaOrganization",
-      "name": "ISD NEWS",
-      "url": "https://isdnews.com",
-      "description": "Portal berita terpercaya untuk masyarakat Indonesia.",
-      "foundingDate": "2020",
-      "founder": { "@type": "Person", "name": "Imam Sahroni Darmawan, S.T" }
-    }
+    {"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"ISD NEWS","url":"https://isdnews.com","description":"Portal berita terpercaya untuk masyarakat Indonesia.","foundingDate":"2020","founder":{"@type":"Person","name":"Imam Sahroni Darmawan, S.T"}}
     </script>
-
-    <!-- Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://picsum.photos" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -65,190 +44,137 @@
               mono: ['DM Mono', 'monospace'],
             },
             colors: {
-              brand: {
-                50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3',
-                300: '#fda4af', 400: '#fb7185', 500: '#C41E3A',
-                600: '#b01831', 700: '#9a1228', 800: '#7d0f21', 900: '#640c1b',
-              },
-              ink: {
-                50: '#f8f8f7', 100: '#f0efed', 200: '#e2e0db',
-                300: '#c8c5be', 400: '#a8a49b', 500: '#8a8578',
-                600: '#6e6a5e', 700: '#534f46', 800: '#3a3730', 900: '#1e1c18',
-              },
+              brand: { 50:'#fff1f2',100:'#ffe4e6',200:'#fecdd3',300:'#fda4af',400:'#fb7185',500:'#C41E3A',600:'#b01831',700:'#9a1228',800:'#7d0f21',900:'#640c1b' },
+              ink: { 50:'#f8f8f7',100:'#f0efed',200:'#e2e0db',300:'#c8c5be',400:'#a8a49b',500:'#8a8578',600:'#6e6a5e',700:'#534f46',800:'#3a3730',900:'#1e1c18' },
             },
-            animation: {
-              'slide-up': 'slideUp 0.4s ease-out',
-              'fade-in': 'fadeIn 0.5s ease-out',
-            },
+            animation: { 'slide-up':'slideUp 0.4s ease-out', 'fade-in':'fadeIn 0.5s ease-out' },
             keyframes: {
-              slideUp: { '0%': { transform: 'translateY(10px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
-              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              slideUp: {'0%':{transform:'translateY(10px)',opacity:'0'},'100%':{transform:'translateY(0)',opacity:'1'}},
+              fadeIn: {'0%':{opacity:'0'},'100%':{opacity:'1'}},
             },
           },
         },
       }
     </script>
-
     <style>
-      /* ============================================================
-         RESET & BASE
-      ============================================================ */
       *, *::before, *::after { box-sizing: border-box; }
       * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
       body { font-family: 'Source Sans 3', sans-serif; background: #f8f8f7; margin: 0; padding: 0; }
       .font-serif, h1, h2, h3, h4 { font-family: 'DM Serif Display', Georgia, serif; }
 
-      /* ============================================================
-         NEWS TICKER — SOLUSI FINAL ANDROID/MOBILE
-         ============================================================
-         Root cause Android tidak jalan:
-         1. CSS class vs inline style konflik → pakai HANYA CSS class
-         2. translateZ(0) conflict dengan translateX → hapus translateZ
-         3. position:absolute + overflow:hidden = Android bug → ganti ke
-            flex row dengan margin-left negatif trick
-         4. will-change:transform bisa crash di low-end Android → set
-            hanya saat animasi aktif
+      /* =====================================================
+         NEWS TICKER — SOLUSI FINAL DIJAMIN JALAN DI ANDROID
+         =====================================================
+         PRINSIP:
+         1. Semua animasi HANYA di CSS global ini (bukan inline)
+         2. Struktur: overflow:hidden > flex-row (bukan absolute)
+         3. Keyframe: HANYA translateX, tidak ada translateZ
+         4. Duplikasi 3x konten → gerak -33.333% = seamless loop
+         ===================================================== */
 
-         Pendekatan TERBUKTI lintas browser (Chrome Android, Safari iOS,
-         Firefox Android, Samsung Internet):
-         - Gunakan satu @keyframes tunggal di CSS (bukan inline style)
-         - Container: overflow:hidden, display:flex, width:100%
-         - Track: display:flex, flex-direction:row, flex-shrink:0
-         - Animasi HANYA pada transform:translateX
-         - Tidak ada position:absolute sama sekali
-      ============================================================ */
-
-      /* Wrapper luar: clips konten yang keluar batas */
-      .ticker-track-outer {
+      /* Container luar — memotong konten yang keluar */
+      .news-ticker-outer {
         overflow: hidden;
-        width: 100%;
-        display: flex;
-        align-items: center;
+        flex: 1;
+        display: block;
+        height: 34px;
+        position: relative;
       }
 
-      /* Track yang bergerak */
-      .ticker-track {
-        display: flex;
+      /* Track yang bergerak — SATU-SATUNYA elemen dengan animasi */
+      .news-ticker-track {
+        display: -webkit-inline-flex;
+        display: inline-flex;
+        -webkit-flex-direction: row;
         flex-direction: row;
-        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-align-items: center;
         align-items: center;
         white-space: nowrap;
-        /* Animasi SATU-SATUNYA — tidak ada inline style yang override ini */
-        -webkit-animation: tickerMove 60s linear infinite;
-                animation: tickerMove 60s linear infinite;
+        height: 34px;
+        /* ANIMASI — tidak ada override dari inline style manapun */
+        -webkit-animation: newsTickerScroll 60s linear infinite;
+        animation: newsTickerScroll 60s linear infinite;
       }
 
-      /* Pause saat hover (desktop) */
-      .ticker-track:hover {
+      /* Pause saat hover di desktop */
+      .news-ticker-track:hover {
         -webkit-animation-play-state: paused;
-                animation-play-state: paused;
+        animation-play-state: paused;
       }
 
-      /*
-        Keyframe: gerak dari posisi awal (0) ke kiri sejauh 1/3 total width.
-        Karena kita duplikasi konten 3x, setelah -33.333% tampilan
-        kembali ke awal → loop seamless tanpa lompatan.
-        Hanya translateX, TIDAK ada translateZ atau transform lain.
-      */
-      @-webkit-keyframes tickerMove {
-        0%   { -webkit-transform: translateX(0); transform: translateX(0); }
-        100% { -webkit-transform: translateX(-33.3333%); transform: translateX(-33.3333%); }
+      /* Keyframe — HANYA translateX, zero transform lain */
+      @-webkit-keyframes newsTickerScroll {
+        from { -webkit-transform: translateX(0%); transform: translateX(0%); }
+        to   { -webkit-transform: translateX(-33.3333%); transform: translateX(-33.3333%); }
       }
-      @keyframes tickerMove {
-        0%   { -webkit-transform: translateX(0); transform: translateX(0); }
-        100% { -webkit-transform: translateX(-33.3333%); transform: translateX(-33.3333%); }
+      @keyframes newsTickerScroll {
+        from { -webkit-transform: translateX(0%); transform: translateX(0%); }
+        to   { -webkit-transform: translateX(-33.3333%); transform: translateX(-33.3333%); }
       }
 
-      /* Setiap item di dalam track */
-      .ticker-item {
+      /* Item individual dalam track */
+      .news-ticker-item {
+        display: -webkit-inline-flex;
         display: inline-flex;
+        -webkit-align-items: center;
         align-items: center;
+        -webkit-flex-shrink: 0;
         flex-shrink: 0;
-        padding: 0 1.5rem;
-        font-size: 0.8125rem;   /* 13px — nyaman dibaca di mobile */
+        padding: 0 1.25rem;
+        font-size: 13px;
         font-weight: 300;
         letter-spacing: 0.01em;
         line-height: 1;
+        color: #fff;
       }
 
-      .ticker-sep {
-        color: rgba(255, 255, 255, 0.4);
-        font-size: 0.5rem;
+      .news-ticker-sep {
+        color: rgba(255,255,255,0.4);
+        font-size: 8px;
+        -webkit-flex-shrink: 0;
         flex-shrink: 0;
+        padding: 0 0.25rem;
       }
 
-      /* Reduced motion — hormati preferensi accessibility user */
+      /* Reduced motion */
       @media (prefers-reduced-motion: reduce) {
-        .ticker-track {
+        .news-ticker-track {
           -webkit-animation: none !important;
-                  animation: none !important;
-          overflow-x: auto;
+          animation: none !important;
         }
       }
 
-      /* ============================================================
-         KOMPONEN LAINNYA
-      ============================================================ */
-      .article-card {
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-      .article-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-      }
-
+      /* ===== KOMPONEN LAIN ===== */
+      .article-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+      .article-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
       .cat-pill { transition: all 0.2s ease; }
       .cat-pill:hover { background: #C41E3A; color: white; }
-
-      @keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-      .breaking-dot { -webkit-animation: pulse-red 1.5s ease-in-out infinite; animation: pulse-red 1.5s ease-in-out infinite; }
-
+      @-webkit-keyframes pulseRed { 0%,100%{opacity:1} 50%{opacity:0.5} }
+      @keyframes pulseRed { 0%,100%{opacity:1} 50%{opacity:0.5} }
+      .breaking-dot { -webkit-animation: pulseRed 1.5s ease-in-out infinite; animation: pulseRed 1.5s ease-in-out infinite; }
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: #f0efed; }
       ::-webkit-scrollbar-thumb { background: #C41E3A; border-radius: 3px; }
-
       .article-body p { margin-bottom: 1.4em; line-height: 1.85; }
       .article-body h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin: 2rem 0 0.8rem; color: #1e1c18; }
       .article-body blockquote { border-left: 4px solid #C41E3A; padding-left: 1.2rem; color: #534f46; font-style: italic; margin: 1.5rem 0; }
-
-      .skeleton { background: linear-gradient(90deg, #e2e0db 25%, #f0efed 50%, #e2e0db 75%); background-size: 400% 100%; animation: shimmer 1.5s infinite; }
-      @keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
-
+      .skeleton { background: linear-gradient(90deg,#e2e0db 25%,#f0efed 50%,#e2e0db 75%); background-size: 400% 100%; animation: shimmer 1.5s infinite; }
+      @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
       .header-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
-
       .img-zoom { overflow: hidden; }
       .img-zoom img { transition: transform 0.4s ease; }
       .img-zoom:hover img { transform: scale(1.04); }
-
       .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
       .no-scrollbar::-webkit-scrollbar { display: none; }
-
       :focus-visible { outline: 2px solid #C41E3A; outline-offset: 2px; border-radius: 3px; }
-
-      .skip-link {
-        position: absolute; top: -40px; left: 0;
-        background: #C41E3A; color: white;
-        padding: 8px 16px; z-index: 9999;
-        font-size: 14px; text-decoration: none;
-        border-radius: 0 0 4px 0; transition: top 0.2s;
-      }
-      .skip-link:focus { top: 0; }
-
-      @media print {
-        header, footer, nav, .no-print { display: none !important; }
-        .article-body { font-size: 12pt; }
-      }
+      .skip-link { position:absolute; top:-40px; left:0; background:#C41E3A; color:white; padding:8px 16px; z-index:9999; font-size:14px; text-decoration:none; border-radius:0 0 4px 0; transition:top 0.2s; }
+      .skip-link:focus { top:0; }
+      @media print { header,footer,nav,.no-print{display:none!important} .article-body{font-size:12pt} }
     </style>
-
     <script type="importmap">
-    {
-      "imports": {
-        "react/": "https://aistudiocdn.com/react@^19.2.0/",
-        "react": "https://aistudiocdn.com/react@^19.2.0",
-        "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.5",
-        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-      }
-    }
+    {"imports":{"react/":"https://aistudiocdn.com/react@^19.2.0/","react":"https://aistudiocdn.com/react@^19.2.0","react-router-dom":"https://aistudiocdn.com/react-router-dom@^7.9.5","react-dom/":"https://aistudiocdn.com/react-dom@^19.2.0/"}}
     </script>
     <link rel="stylesheet" href="/index.css" />
   </head>
