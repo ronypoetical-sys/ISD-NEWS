@@ -30,6 +30,8 @@ export interface Article {
   slug: string;
   content: string;
   imageUrl: string;
+  imageCaption?: string;      // Caption / keterangan foto
+  metaDescription?: string;  // Meta deskripsi untuk SEO
   authorId: number;
   authorName: string;
   categoryId: string;
@@ -43,3 +45,6 @@ export interface GalleryImage {
   imageUrl: string;
   caption: string;
 }
+
+// Mode penulisan konten artikel
+export type ContentMode = 'text' | 'html';
