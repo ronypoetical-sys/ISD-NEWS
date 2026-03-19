@@ -21,6 +21,12 @@ import SubmitArticlePage from './pages/SubmitArticlePage';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 
+// Halaman Legal & Kontributor
+import KebijakanPrivasiPage from './pages/KebijakanPrivasiPage';
+import SyaratPenggunaanPage from './pages/SyaratPenggunaanPage';
+import PedomanMediaSiberPage from './pages/PedomanMediaSiberPage';
+import DaftarKontributorPage from './pages/DaftarKontributorPage';
+
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-ink-50">
@@ -39,10 +45,10 @@ const App: React.FC = () => {
       <ArticleProvider>
         <HashRouter>
           <Routes>
-            {/* Login — full screen, no header/footer */}
+            {/* Login — full screen */}
             <Route path="/login" element={<LoginPage />} />
 
-            {/* Public routes — with header/footer */}
+            {/* Public routes */}
             <Route path="/" element={<AppLayout><HomePage /></AppLayout>} />
             <Route path="/profil" element={<AppLayout><ProfilePage /></AppLayout>} />
             <Route path="/kegiatan" element={<AppLayout><ActivitiesPage /></AppLayout>} />
@@ -51,88 +57,36 @@ const App: React.FC = () => {
             <Route path="/artikel/:slug" element={<AppLayout><ArticleDetailPage /></AppLayout>} />
             <Route path="/kategori/:id" element={<AppLayout><CategoryPage /></AppLayout>} />
 
+            {/* Halaman Legal */}
+            <Route path="/kebijakan-privasi" element={<AppLayout><KebijakanPrivasiPage /></AppLayout>} />
+            <Route path="/syarat-penggunaan" element={<AppLayout><SyaratPenggunaanPage /></AppLayout>} />
+            <Route path="/pedoman-media-siber" element={<AppLayout><PedomanMediaSiberPage /></AppLayout>} />
+
+            {/* Daftar Kontributor — halaman publik */}
+            <Route path="/daftar-kontributor" element={<AppLayout><DaftarKontributorPage /></AppLayout>} />
+
             {/* Protected User Routes */}
             <Route
               path="/dashboard"
-              element={
-                <AppLayout>
-                  <PrivateRoute>
-                    <UserDashboardPage />
-                  </PrivateRoute>
-                </AppLayout>
-              }
+              element={<AppLayout><PrivateRoute><UserDashboardPage /></PrivateRoute></AppLayout>}
             />
             <Route
               path="/kirim-artikel"
-              element={
-                <AppLayout>
-                  <PrivateRoute>
-                    <SubmitArticlePage />
-                  </PrivateRoute>
-                </AppLayout>
-              }
+              element={<AppLayout><PrivateRoute><SubmitArticlePage /></PrivateRoute></AppLayout>}
             />
             <Route
               path="/edit-artikel/:id"
-              element={
-                <AppLayout>
-                  <PrivateRoute>
-                    <SubmitArticlePage />
-                  </PrivateRoute>
-                </AppLayout>
-              }
+              element={<AppLayout><PrivateRoute><SubmitArticlePage /></PrivateRoute></AppLayout>}
             />
 
             {/* Protected Admin Routes */}
-            <Route
-              path="/admin"
-              element={
-                <AppLayout>
-                  <AdminRoute>
-                    <AdminDashboardPage />
-                  </AdminRoute>
-                </AppLayout>
-              }
-            />
-            <Route
-              path="/admin/artikel"
-              element={
-                <AppLayout>
-                  <AdminRoute>
-                    <ManageArticlesPage />
-                  </AdminRoute>
-                </AppLayout>
-              }
-            />
-            {/* Article editor has its own full layout */}
-            <Route
-              path="/admin/artikel/baru"
-              element={
-                <AdminRoute>
-                  <ArticleEditorPage />
-                </AdminRoute>
-              }
-            />
-            <Route
-              path="/admin/artikel/edit/:id"
-              element={
-                <AdminRoute>
-                  <ArticleEditorPage />
-                </AdminRoute>
-              }
-            />
-            <Route
-              path="/admin/pengguna"
-              element={
-                <AppLayout>
-                  <AdminRoute>
-                    <ManageUsersPage />
-                  </AdminRoute>
-                </AppLayout>
-              }
-            />
+            <Route path="/admin" element={<AppLayout><AdminRoute><AdminDashboardPage /></AdminRoute></AppLayout>} />
+            <Route path="/admin/artikel" element={<AppLayout><AdminRoute><ManageArticlesPage /></AdminRoute></AppLayout>} />
+            <Route path="/admin/artikel/baru" element={<AdminRoute><ArticleEditorPage /></AdminRoute>} />
+            <Route path="/admin/artikel/edit/:id" element={<AdminRoute><ArticleEditorPage /></AdminRoute>} />
+            <Route path="/admin/pengguna" element={<AppLayout><AdminRoute><ManageUsersPage /></AdminRoute></AppLayout>} />
 
-            {/* 404 Fallback */}
+            {/* 404 */}
             <Route
               path="*"
               element={
@@ -140,13 +94,8 @@ const App: React.FC = () => {
                   <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
                     <div className="text-8xl font-serif font-bold text-ink-200 mb-4" aria-hidden="true">404</div>
                     <h1 className="font-serif text-2xl font-bold text-ink-900 mb-2">Halaman Tidak Ditemukan</h1>
-                    <p className="text-ink-500 mb-6 max-w-sm">
-                      Halaman yang Anda cari tidak ada atau sudah dipindahkan.
-                    </p>
-                    <a
-                      href="/"
-                      className="px-6 py-3 bg-brand-500 text-white text-sm font-semibold rounded-lg hover:bg-brand-600 transition-colors"
-                    >
+                    <p className="text-ink-500 mb-6 max-w-sm">Halaman yang Anda cari tidak ada atau sudah dipindahkan.</p>
+                    <a href="/" className="px-6 py-3 bg-brand-500 text-white text-sm font-semibold rounded-lg hover:bg-brand-600 transition-colors">
                       Kembali ke Beranda
                     </a>
                   </div>

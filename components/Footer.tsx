@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
     { to: '/kegiatan', label: 'Kegiatan' },
     { to: '/galeri', label: 'Galeri Foto' },
     { to: '/kontak', label: 'Kontak Redaksi' },
-    { to: '/login', label: 'Portal Kontributor' },
+    { to: '/daftar-kontributor', label: 'Daftar Kontributor' },
   ];
 
   const topCategories = CATEGORIES.slice(0, 7);
@@ -72,7 +72,6 @@ const Footer: React.FC = () => {
             <p className="text-sm text-ink-400 leading-relaxed mt-4 mb-6">
               Menyajikan berita terkini, analisis mendalam, dan jurnalisme berkualitas untuk masyarakat Indonesia yang cerdas dan kritis.
             </p>
-            {/* Social Links */}
             <div className="flex items-center gap-3">
               {socialLinks.map(social => (
                 <a
@@ -131,25 +130,16 @@ const Footer: React.FC = () => {
             <p className="text-sm text-ink-400 leading-relaxed mb-4">
               Dapatkan rangkuman berita terpenting langsung di kotak masuk Anda setiap pagi.
             </p>
-            <form
-              onSubmit={e => e.preventDefault()}
-              className="space-y-2"
-              aria-label="Formulir berlangganan newsletter"
-            >
-              <div>
-                <label htmlFor="footer-email" className="sr-only">Alamat email untuk newsletter</label>
-                <input
-                  id="footer-email"
-                  type="email"
-                  placeholder="Alamat email Anda"
-                  autoComplete="email"
-                  className="w-full px-3 py-2.5 bg-ink-800 border border-ink-700 text-white text-sm rounded-md placeholder-ink-500 focus:outline-none focus:border-brand-500 transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-md transition-colors"
-              >
+            <form onSubmit={e => e.preventDefault()} className="space-y-2" aria-label="Formulir berlangganan newsletter">
+              <label htmlFor="footer-email" className="sr-only">Alamat email untuk newsletter</label>
+              <input
+                id="footer-email"
+                type="email"
+                placeholder="Alamat email Anda"
+                autoComplete="email"
+                className="w-full px-3 py-2.5 bg-ink-800 border border-ink-700 text-white text-sm rounded-md placeholder-ink-500 focus:outline-none focus:border-brand-500 transition-colors"
+              />
+              <button type="submit" className="w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium rounded-md transition-colors">
                 Langganan Gratis
               </button>
             </form>
@@ -158,19 +148,39 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* ===== BOTTOM BAR — MOBILE: 2 baris, DESKTOP: tetap rapi ===== */}
       <div className="border-t border-ink-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-ink-500 text-center sm:text-left">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          {/* Baris 1 — Copyright */}
+          <p className="text-xs text-ink-500 text-center leading-relaxed">
             &copy; {year} ISD NEWS. Dikembangkan oleh{' '}
             <span className="text-ink-300 font-medium">Imam Sahroni Darmawan, S.T</span>
           </p>
-          <nav aria-label="Tautan kebijakan" className="flex items-center gap-4 text-xs text-ink-600">
-            <a href="#" className="hover:text-ink-300 transition-colors">Kebijakan Privasi</a>
-            <span aria-hidden="true">|</span>
-            <a href="#" className="hover:text-ink-300 transition-colors">Syarat Penggunaan</a>
-            <span aria-hidden="true">|</span>
-            <a href="#" className="hover:text-ink-300 transition-colors">Pedoman Media Siber</a>
+          {/* Baris 2 — Legal Links (selalu 2 baris di mobile karena flex-col di bawah sm) */}
+          <nav
+            aria-label="Tautan kebijakan"
+            className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 mt-2.5"
+          >
+            <Link
+              to="/kebijakan-privasi"
+              className="text-xs text-ink-600 hover:text-ink-300 transition-colors whitespace-nowrap"
+            >
+              Kebijakan Privasi
+            </Link>
+            <span className="text-ink-700 text-xs hidden sm:inline" aria-hidden="true">|</span>
+            <Link
+              to="/syarat-penggunaan"
+              className="text-xs text-ink-600 hover:text-ink-300 transition-colors whitespace-nowrap"
+            >
+              Syarat Penggunaan
+            </Link>
+            <span className="text-ink-700 text-xs hidden sm:inline" aria-hidden="true">|</span>
+            <Link
+              to="/pedoman-media-siber"
+              className="text-xs text-ink-600 hover:text-ink-300 transition-colors whitespace-nowrap"
+            >
+              Pedoman Media Siber
+            </Link>
           </nav>
         </div>
       </div>
