@@ -21,14 +21,11 @@ import SubmitArticlePage from './pages/SubmitArticlePage';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 
-// Pages that need full-screen layout (no header/footer)
-const FULLSCREEN_ROUTES = ['/login'];
-
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen bg-ink-50">
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow" tabIndex={-1}>
         {children}
       </main>
       <Footer />
@@ -45,7 +42,7 @@ const App: React.FC = () => {
             {/* Login — full screen, no header/footer */}
             <Route path="/login" element={<LoginPage />} />
 
-            {/* All other routes — with header/footer */}
+            {/* Public routes — with header/footer */}
             <Route path="/" element={<AppLayout><HomePage /></AppLayout>} />
             <Route path="/profil" element={<AppLayout><ProfilePage /></AppLayout>} />
             <Route path="/kegiatan" element={<AppLayout><ActivitiesPage /></AppLayout>} />
@@ -54,26 +51,108 @@ const App: React.FC = () => {
             <Route path="/artikel/:slug" element={<AppLayout><ArticleDetailPage /></AppLayout>} />
             <Route path="/kategori/:id" element={<AppLayout><CategoryPage /></AppLayout>} />
 
-            {/* User Routes */}
+            {/* Protected User Routes */}
             <Route
               path="/dashboard"
-              element={<AppLayout><PrivateRoute><UserDashboardPage /></PrivateRoute></AppLayout>}
+              element={
+                <AppLayout>
+                  <PrivateRoute>
+                    <UserDashboardPage />
+                  </PrivateRoute>
+                </AppLayout>
+              }
             />
             <Route
               path="/kirim-artikel"
-              element={<AppLayout><PrivateRoute><SubmitArticlePage /></PrivateRoute></AppLayout>}
+              element={
+                <AppLayout>
+                  <PrivateRoute>
+                    <SubmitArticlePage />
+                  </PrivateRoute>
+                </AppLayout>
+              }
             />
             <Route
               path="/edit-artikel/:id"
-              element={<AppLayout><PrivateRoute><SubmitArticlePage /></PrivateRoute></AppLayout>}
+              element={
+                <AppLayout>
+                  <PrivateRoute>
+                    <SubmitArticlePage />
+                  </PrivateRoute>
+                </AppLayout>
+              }
             />
 
-            {/* Admin Routes — editor has its own layout */}
-            <Route path="/admin" element={<AppLayout><AdminRoute><AdminDashboardPage /></AdminRoute></AppLayout>} />
-            <Route path="/admin/artikel" element={<AppLayout><AdminRoute><ManageArticlesPage /></AdminRoute></AppLayout>} />
-            <Route path="/admin/artikel/baru" element={<AdminRoute><ArticleEditorPage /></AdminRoute>} />
-            <Route path="/admin/artikel/edit/:id" element={<AdminRoute><ArticleEditorPage /></AdminRoute>} />
-            <Route path="/admin/pengguna" element={<AppLayout><AdminRoute><ManageUsersPage /></AdminRoute></AppLayout>} />
+            {/* Protected Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <AppLayout>
+                  <AdminRoute>
+                    <AdminDashboardPage />
+                  </AdminRoute>
+                </AppLayout>
+              }
+            />
+            <Route
+              path="/admin/artikel"
+              element={
+                <AppLayout>
+                  <AdminRoute>
+                    <ManageArticlesPage />
+                  </AdminRoute>
+                </AppLayout>
+              }
+            />
+            {/* Article editor has its own full layout */}
+            <Route
+              path="/admin/artikel/baru"
+              element={
+                <AdminRoute>
+                  <ArticleEditorPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/artikel/edit/:id"
+              element={
+                <AdminRoute>
+                  <ArticleEditorPage />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/pengguna"
+              element={
+                <AppLayout>
+                  <AdminRoute>
+                    <ManageUsersPage />
+                  </AdminRoute>
+                </AppLayout>
+              }
+            />
+
+            {/* 404 Fallback */}
+            <Route
+              path="*"
+              element={
+                <AppLayout>
+                  <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
+                    <div className="text-8xl font-serif font-bold text-ink-200 mb-4" aria-hidden="true">404</div>
+                    <h1 className="font-serif text-2xl font-bold text-ink-900 mb-2">Halaman Tidak Ditemukan</h1>
+                    <p className="text-ink-500 mb-6 max-w-sm">
+                      Halaman yang Anda cari tidak ada atau sudah dipindahkan.
+                    </p>
+                    <a
+                      href="/"
+                      className="px-6 py-3 bg-brand-500 text-white text-sm font-semibold rounded-lg hover:bg-brand-600 transition-colors"
+                    >
+                      Kembali ke Beranda
+                    </a>
+                  </div>
+                </AppLayout>
+              }
+            />
           </Routes>
         </HashRouter>
       </ArticleProvider>
