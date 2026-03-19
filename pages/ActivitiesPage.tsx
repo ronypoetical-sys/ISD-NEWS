@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const activities = [
   {
@@ -113,13 +114,22 @@ const ActivitiesPage: React.FC = () => {
           <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
             Punya cerita yang layak didengar? Bergabunglah sebagai kontributor dan jadilah bagian dari ekosistem jurnalisme warga yang memberdayakan masyarakat.
           </p>
-          <a
-            href="/login"
+          {/*
+           * FIX #6 — LINK TOMBOL "DAFTAR SEBAGAI KONTRIBUTOR"
+           * MASALAH: href="/login" menyebabkan full page reload pada HashRouter.
+           *          URL yang benar untuk HashRouter adalah /#/daftar-kontributor
+           *          tapi cara terbaik adalah menggunakan komponen <Link> dari
+           *          react-router-dom — otomatis menghasilkan /#/daftar-kontributor.
+           * SOLUSI: Ganti <a href> → <Link to> sehingga routing internal,
+           *         tidak ada reload, tidak ada broken route.
+           */}
+          <Link
+            to="/daftar-kontributor"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-brand-600 font-bold rounded-xl hover:bg-ink-50 transition-colors text-sm"
           >
             Daftar sebagai Kontributor
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-          </a>
+          </Link>
         </section>
       </div>
     </div>

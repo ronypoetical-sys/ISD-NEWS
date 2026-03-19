@@ -190,10 +190,13 @@ const ArticleDetailPage: React.FC = () => {
             {/* Article Content */}
             <div className="lg:col-span-2">
               {/* Featured Image */}
+              {/* FIX #3 — CAPTION GAMBAR SEMANTIK
+                  Tampilkan article.imageCaption jika ada, fallback ke default.
+                  alt text menggunakan caption untuk aksesibilitas & SEO. */}
               <figure className="mb-8 rounded-2xl overflow-hidden shadow-lg">
                 <img
                   src={article.imageUrl}
-                  alt={article.title}
+                  alt={article.imageCaption || article.title}
                   className="w-full h-auto max-h-[500px] object-cover"
                   loading="eager"
                   width={800}
@@ -203,7 +206,9 @@ const ArticleDetailPage: React.FC = () => {
                   }}
                 />
                 <figcaption className="bg-ink-900 text-ink-400 text-xs px-4 py-2.5 text-center">
-                  Foto: {article.authorName} / ISD NEWS
+                  {article.imageCaption
+                    ? article.imageCaption
+                    : `Foto: ${article.authorName} / ISD NEWS`}
                 </figcaption>
               </figure>
 

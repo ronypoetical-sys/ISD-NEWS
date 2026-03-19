@@ -151,10 +151,11 @@ const Footer: React.FC = () => {
       {/* ===== BOTTOM BAR — MOBILE: 2 baris, DESKTOP: tetap rapi ===== */}
       <div className="border-t border-ink-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          {/* Baris 1 — Copyright */}
+          {/* Baris 1 — Copyright — FIX #4: Format diubah sesuai permintaan */}
           <p className="text-xs text-ink-500 text-center leading-relaxed">
-            &copy; {year} ISD NEWS. Dikembangkan oleh{' '}
-            <span className="text-ink-300 font-medium">Imam Sahroni Darmawan, S.T</span>
+            &copy; {year} ISD NEWS{' '}
+            <span className="text-ink-600" aria-hidden="true">|</span>{' '}
+            <span className="text-ink-300">By Imam Sahroni Darmawan, S.T</span>
           </p>
           {/* Baris 2 — Legal Links (selalu 2 baris di mobile karena flex-col di bawah sm) */}
           <nav

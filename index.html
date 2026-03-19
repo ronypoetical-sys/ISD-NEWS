@@ -73,9 +73,11 @@
          ===================================================== */
 
       /* Container luar — memotong konten yang keluar */
+      /* news-ticker-outer: wrapper yang memotong konten keluar batas */
       .news-ticker-outer {
         overflow: hidden;
         flex: 1;
+        min-width: 0;          /* FIX: cegah flex-child overflow di Safari */
         display: block;
         height: 34px;
         position: relative;
@@ -94,8 +96,8 @@
         white-space: nowrap;
         height: 34px;
         /* ANIMASI — tidak ada override dari inline style manapun */
-        -webkit-animation: newsTickerScroll 60s linear infinite;
-        animation: newsTickerScroll 60s linear infinite;
+        -webkit-animation: newsTickerScroll 40s linear infinite;
+        animation: newsTickerScroll 40s linear infinite;
       }
 
       /* Pause saat hover di desktop */
