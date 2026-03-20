@@ -1,5 +1,19 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+// ─────────────────────────────────────────────────────────────────────────────
+// PENTING: Ganti HashRouter → BrowserRouter
+//
+// HashRouter menghasilkan URL: beritakini.online/#/artikel/slug
+//   → Bagian setelah # TIDAK dikirim ke server
+//   → Mesin pencari dan crawler bot tidak bisa mengindeks halaman individual
+//   → Share link di WhatsApp/Telegram tidak menampilkan preview artikel
+//
+// BrowserRouter menghasilkan URL: beritakini.online/artikel/slug
+//   → URL bersih, bisa diindeks Googlebot
+//   → og:image per artikel muncul saat share ke WA/Telegram/FB
+//   → SYARAT: server harus dikonfigurasi fallback ke index.html
+//             (lihat file _redirects / vercel.json / nginx.conf)
+// ─────────────────────────────────────────────────────────────────────────────
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ArticleProvider } from './contexts/ArticleContext';
 import Header from './components/Header';
@@ -43,7 +57,8 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <ArticleProvider>
-        <HashRouter>
+        {/* BrowserRouter — URL bersih, SEO-friendly, crawlable */}
+        <BrowserRouter>
           <Routes>
             {/* Login — full screen */}
             <Route path="/login" element={<LoginPage />} />
@@ -103,7 +118,7 @@ const App: React.FC = () => {
               }
             />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </ArticleProvider>
     </AuthProvider>
   );
