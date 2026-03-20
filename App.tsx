@@ -320,6 +320,9 @@ const DashboardPage = () => {
 
   const myArticles = articles.filter(a => a.authorName === (user.user_metadata?.full_name || user.email));
   const pending = articles.filter(a => a.status === 'pending');
+  
+  // Tentukan siapa yang jadi admin (Email Anda ATAU yang mengandung kata admin)
+  const isAdmin = user.email === 'rony.poetical@gmail.com' || user.email?.includes('admin');
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -328,8 +331,8 @@ const DashboardPage = () => {
         <Link to="/tulis-artikel" className="bg-brand-500 text-white px-5 py-2.5 rounded-lg font-bold hover:bg-brand-600 flex items-center gap-2"><Edit size={18}/> Tulis Artikel Baru</Link>
       </div>
 
-      {/* ADMIN SECTION (Tampil jika email admin) */}
-      {user.email?.includes('admin') && (
+      {/* ADMIN SECTION (Tampil jika email admin atau email rony) */}
+      {isAdmin && (
         <div className="mb-10 bg-yellow-50 border border-yellow-200 p-6 rounded-2xl">
           <h2 className="font-bold text-yellow-800 mb-4 flex items-center gap-2"><CheckCircle /> Antrean Persetujuan (Menunggu Publikasi)</h2>
           <div className="space-y-3">
@@ -382,12 +385,15 @@ const SubmitArticlePage = () => {
 
   if (!user) return <Navigate to="/login" />;
 
+  // Cek apakah yang menulis adalah admin/Anda
+  const isAdmin = user.email === 'rony.poetical@gmail.com' || user.email?.includes('admin');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addArticle({
       ...form,
       authorName: user.user_metadata?.full_name || user.email.split('@')[0],
-      status: user.email?.includes('admin') ? 'published' : 'pending'
+      status: isAdmin ? 'published' : 'pending' // Langsung tayang jika Anda yang nulis
     });
     alert("Artikel berhasil dikirim!");
     navigate('/dashboard');
