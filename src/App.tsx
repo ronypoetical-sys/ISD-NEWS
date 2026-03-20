@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Trash2, LayoutDashboard, LogOut, PlusCircle, FileText, ChevronRight, AlertCircle } from 'lucide-react';
 
 // Kunci Supabase Anda (Langsung ditanam agar tidak ada masalah .env)
-const SUPABASE_URL = 'https://voukghjtxmlylqgxcep.supabase.co';
+const SUPABASE_URL = 'https://voukghjtxmlbylqgxcep.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvdWtnaGp0eG1sYnlscWd4Y2VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5ODk0MzUsImV4cCI6MjA4OTU2NTQzNX0.zdI2xhxXF-V6rMbi0TpuM90oldAbogrZxpBi7rt01Mc';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
