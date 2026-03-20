@@ -2,295 +2,40 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%23C41E3A'/><text y='.9em' font-size='60' x='50' dominant-baseline='middle' text-anchor='middle' fill='white' font-weight='bold'>I</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ============================================================
-         DEFAULT META — akan di-override oleh updatePageMeta() saat
-         navigasi ke halaman artikel tertentu
-         ============================================================ -->
-    <title>Berita Kini — Portal Berita Terpercaya Indonesia</title>
-    <meta name="description" content="Berita Kini - Portal berita terpercaya, aktual, dan menginspirasi. Sajikan informasi terkini dari seluruh penjuru Indonesia dan dunia." />
-    <meta name="keywords" content="berita indonesia, portal berita, berita terkini, berita nasional, Berita Kini" />
-    <meta name="author" content="Imam Sahroni Darmawan, S.T" />
-    <meta name="robots" content="index, follow" />
-    <link id="canonical-url" rel="canonical" href="https://beritakini.online/" />
-
-    <!-- Open Graph default -->
-    <meta property="og:type" content="website" />
-    <meta id="og-url" property="og:url" content="https://beritakini.online/" />
-    <meta id="og-title" property="og:title" content="Berita Kini — Portal Berita Terpercaya Indonesia" />
-    <meta id="og-description" property="og:description" content="Menyajikan berita terkini, analisis mendalam, dan jurnalisme berkualitas untuk masyarakat Indonesia." />
-    <meta id="og-image" property="og:image" content="https://beritakini.online/og-image.jpg" />
-    <meta id="og-image-width" property="og:image:width" content="1200" />
-    <meta id="og-image-height" property="og:image:height" content="630" />
-    <meta property="og:locale" content="id_ID" />
-    <meta property="og:site_name" content="Berita Kini" />
-
-    <!-- Twitter Card default -->
-    <meta id="tw-card" name="twitter:card" content="summary_large_image" />
-    <meta id="tw-title" name="twitter:title" content="Berita Kini — Portal Berita Terpercaya Indonesia" />
-    <meta id="tw-description" name="twitter:description" content="Menyajikan berita terkini dan jurnalisme berkualitas untuk masyarakat Indonesia." />
-    <meta id="tw-image" name="twitter:image" content="https://beritakini.online/og-image.jpg" />
-    <meta name="twitter:site" content="@beritakini" />
-
-    <meta name="theme-color" content="#C41E3A" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Berita Kini" />
-
-    <!-- Schema.org default -->
-    <script id="schema-org" type="application/ld+json">
-    {"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"Berita Kini","url":"https://beritakini.online","description":"Portal berita terpercaya untuk masyarakat Indonesia.","foundingDate":"2020","founder":{"@type":"Person","name":"Imam Sahroni Darmawan, S.T"}}
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://picsum.photos" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>ISD NEWS — Portal Berita Terpercaya</title>
+    <!-- Tambahan script dasar Tailwind langsung di HTML sebagai backup -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['DM Serif Display', 'Georgia', 'serif'],
-              sans: ['Source Sans 3', 'system-ui', 'sans-serif'],
-              mono: ['DM Mono', 'monospace'],
-            },
-            colors: {
-              brand: { 50:'#fff1f2',100:'#ffe4e6',200:'#fecdd3',300:'#fda4af',400:'#fb7185',500:'#C41E3A',600:'#b01831',700:'#9a1228',800:'#7d0f21',900:'#640c1b' },
-              ink: { 50:'#f8f8f7',100:'#f0efed',200:'#e2e0db',300:'#c8c5be',400:'#a8a49b',500:'#8a8578',600:'#6e6a5e',700:'#534f46',800:'#3a3730',900:'#1e1c18' },
-            },
-            animation: { 'slide-up':'slideUp 0.4s ease-out', 'fade-in':'fadeIn 0.5s ease-out' },
-            keyframes: {
-              slideUp: {'0%':{transform:'translateY(10px)',opacity:'0'},'100%':{transform:'translateY(0)',opacity:'1'}},
-              fadeIn: {'0%':{opacity:'0'},'100%':{opacity:'1'}},
-            },
-          },
-        },
-      }
-    </script>
-
-    <!-- ============================================================
-         DYNAMIC META UPDATER
-         Dipanggil dari React (via window.updatePageMeta) setiap kali
-         halaman berubah. Memperbarui semua tag OG, Twitter, canonical,
-         title, description, dan structured data.
-
-         Kenapa perlu ini?
-         - SPA (React) tidak reload HTML saat navigasi
-         - Crawler media sosial (WhatsApp, Telegram, FB, Twitter/X)
-           membaca HTML mentah dari server, bukan hasil JS
-         - Solusi lengkap butuh SSR (Next.js) atau prerender proxy
-         - Untuk crawler bot yg menjalankan JS (Googlebot, dll),
-           updatePageMeta() memastikan meta tags sudah terset
-           sebelum bot mengindeks konten
-         ============================================================ -->
-    <script>
-      const BASE_URL = 'https://beritakini.online';
-
-      /**
-       * Update semua meta tags secara dinamis.
-       * Dipanggil dari React komponen saat halaman/artikel berubah.
-       *
-       * @param {Object} meta
-       * @param {string} meta.title        - Judul halaman (tanpa suffix)
-       * @param {string} meta.description  - Meta description (maks 160 char)
-       * @param {string} meta.url          - Path relatif, contoh: /artikel/slug
-       * @param {string} [meta.image]      - URL gambar absolut untuk OG image
-       * @param {string} [meta.type]       - og:type, default 'article' untuk artikel
-       * @param {string} [meta.author]     - Nama penulis artikel
-       * @param {string} [meta.datePublished] - ISO date string
-       * @param {Object} [meta.schema]     - Custom JSON-LD object (opsional)
-       */
-      window.updatePageMeta = function(meta) {
-        const SITE_NAME = 'Berita Kini';
-        const SUFFIX    = ' — ' + SITE_NAME;
-        const fullTitle = meta.title ? (meta.title + SUFFIX) : (SITE_NAME + ' — Portal Berita Terpercaya Indonesia');
-        const fullUrl   = meta.url ? (BASE_URL + meta.url) : BASE_URL;
-        const image     = meta.image || (BASE_URL + '/og-image.jpg');
-        const desc      = meta.description || 'Menyajikan berita terkini, analisis mendalam, dan jurnalisme berkualitas untuk masyarakat Indonesia.';
-
-        // --- <title> ---
-        document.title = fullTitle;
-
-        // --- <meta name="description"> ---
-        let descTag = document.querySelector('meta[name="description"]');
-        if (descTag) descTag.setAttribute('content', desc);
-
-        // --- Canonical ---
-        const canonical = document.getElementById('canonical-url');
-        if (canonical) canonical.setAttribute('href', fullUrl);
-
-        // --- Open Graph ---
-        const setMeta = (id, val) => {
-          const el = document.getElementById(id);
-          if (el) el.setAttribute('content', val);
-        };
-
-        setMeta('og-url',         fullUrl);
-        setMeta('og-title',       fullTitle);
-        setMeta('og-description', desc);
-        setMeta('og-image',       image);
-        setMeta('og-image-width', '1200');
-        setMeta('og-image-height','630');
-
-        // og:type — 'article' untuk artikel, 'website' untuk halaman lain
-        let ogType = document.querySelector('meta[property="og:type"]');
-        if (ogType) ogType.setAttribute('content', meta.type || 'website');
-
-        // og:article:author dan og:article:published_time
-        if (meta.author) {
-          let ogAuthor = document.querySelector('meta[property="article:author"]');
-          if (!ogAuthor) {
-            ogAuthor = document.createElement('meta');
-            ogAuthor.setAttribute('property', 'article:author');
-            document.head.appendChild(ogAuthor);
-          }
-          ogAuthor.setAttribute('content', meta.author);
-        }
-
-        if (meta.datePublished) {
-          let ogDate = document.querySelector('meta[property="article:published_time"]');
-          if (!ogDate) {
-            ogDate = document.createElement('meta');
-            ogDate.setAttribute('property', 'article:published_time');
-            document.head.appendChild(ogDate);
-          }
-          ogDate.setAttribute('content', meta.datePublished);
-        }
-
-        // --- Twitter Card ---
-        setMeta('tw-card',        'summary_large_image');
-        setMeta('tw-title',       fullTitle);
-        setMeta('tw-description', desc);
-        setMeta('tw-image',       image);
-
-        // --- JSON-LD Structured Data ---
-        const schemaTag = document.getElementById('schema-org');
-        if (schemaTag) {
-          const schema = meta.schema || {
-            '@context': 'https://schema.org',
-            '@type':    'NewsMediaOrganization',
-            name:       SITE_NAME,
-            url:        BASE_URL,
-            description:'Portal berita terpercaya untuk masyarakat Indonesia.',
-            foundingDate:'2020',
-            founder: { '@type':'Person', name:'Imam Sahroni Darmawan, S.T' },
-          };
-          schemaTag.textContent = JSON.stringify(schema);
-        }
-      };
-    </script>
-
     <style>
-      *, *::before, *::after { box-sizing: border-box; }
-      * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-      body { font-family: 'Source Sans 3', sans-serif; background: #f8f8f7; margin: 0; padding: 0; }
-      .font-serif, h1, h2, h3, h4 { font-family: 'DM Serif Display', Georgia, serif; }
-
-      /* =====================================================
-         NEWS TICKER — SOLUSI FINAL DIJAMIN JALAN DI ANDROID
-         ===================================================== */
-      .news-ticker-outer {
-        overflow: hidden;
-        flex: 1;
-        min-width: 0;
-        display: block;
-        height: 34px;
-        position: relative;
-      }
-      .news-ticker-track {
-        display: -webkit-inline-flex;
-        display: inline-flex;
-        -webkit-flex-direction: row;
-        flex-direction: row;
-        -webkit-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-align-items: center;
-        align-items: center;
-        white-space: nowrap;
-        height: 34px;
-        -webkit-animation: newsTickerScroll 40s linear infinite;
-        animation: newsTickerScroll 40s linear infinite;
-      }
-      .news-ticker-track:hover {
-        -webkit-animation-play-state: paused;
-        animation-play-state: paused;
-      }
-      @-webkit-keyframes newsTickerScroll {
-        from { -webkit-transform: translateX(0%); transform: translateX(0%); }
-        to   { -webkit-transform: translateX(-33.3333%); transform: translateX(-33.3333%); }
-      }
-      @keyframes newsTickerScroll {
-        from { -webkit-transform: translateX(0%); transform: translateX(0%); }
-        to   { -webkit-transform: translateX(-33.3333%); transform: translateX(-33.3333%); }
-      }
-      .news-ticker-item {
-        display: -webkit-inline-flex;
-        display: inline-flex;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-flex-shrink: 0;
-        flex-shrink: 0;
-        padding: 0 1.25rem;
-        font-size: 13px;
-        font-weight: 300;
-        letter-spacing: 0.01em;
-        line-height: 1;
-        color: #fff;
-      }
-      .news-ticker-sep {
-        color: rgba(255,255,255,0.4);
-        font-size: 8px;
-        -webkit-flex-shrink: 0;
-        flex-shrink: 0;
-        padding: 0 0.25rem;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .news-ticker-track {
-          -webkit-animation: none !important;
-          animation: none !important;
-        }
-      }
-
-      /* ===== KOMPONEN LAIN ===== */
-      .article-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-      .article-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
-      .cat-pill { transition: all 0.2s ease; }
-      .cat-pill:hover { background: #C41E3A; color: white; }
-      @-webkit-keyframes pulseRed { 0%,100%{opacity:1} 50%{opacity:0.5} }
-      @keyframes pulseRed { 0%,100%{opacity:1} 50%{opacity:0.5} }
-      .breaking-dot { -webkit-animation: pulseRed 1.5s ease-in-out infinite; animation: pulseRed 1.5s ease-in-out infinite; }
-      ::-webkit-scrollbar { width: 6px; }
-      ::-webkit-scrollbar-track { background: #f0efed; }
-      ::-webkit-scrollbar-thumb { background: #C41E3A; border-radius: 3px; }
-      .article-body p { margin-bottom: 1.4em; line-height: 1.85; }
-      .article-body h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin: 2rem 0 0.8rem; color: #1e1c18; }
-      .article-body blockquote { border-left: 4px solid #C41E3A; padding-left: 1.2rem; color: #534f46; font-style: italic; margin: 1.5rem 0; }
-      .skeleton { background: linear-gradient(90deg,#e2e0db 25%,#f0efed 50%,#e2e0db 75%); background-size: 400% 100%; animation: shimmer 1.5s infinite; }
-      @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
-      .header-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.12); }
-      .img-zoom { overflow: hidden; }
-      .img-zoom img { transition: transform 0.4s ease; }
-      .img-zoom:hover img { transform: scale(1.04); }
-      .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      :focus-visible { outline: 2px solid #C41E3A; outline-offset: 2px; border-radius: 3px; }
-      .skip-link { position:absolute; top:-40px; left:0; background:#C41E3A; color:white; padding:8px 16px; z-index:9999; font-size:14px; text-decoration:none; border-radius:0 0 4px 0; transition:top 0.2s; }
-      .skip-link:focus { top:0; }
-      @media print { header,footer,nav,.no-print{display:none!important} .article-body{font-size:12pt} }
+      @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+      body { font-family: 'Inter', sans-serif; }
+      .font-serif { font-family: 'DM Serif Display', serif; }
+      /* Brand Colors */
+      .bg-brand-500 { background-color: #E63946; }
+      .text-brand-500 { color: #E63946; }
+      .text-brand-400 { color: #F87171; }
+      .border-brand-500 { border-color: #E63946; }
+      .hover\:bg-brand-600:hover { background-color: #BE123C; }
+      .hover\:text-brand-500:hover { color: #E63946; }
+      .hover\:text-brand-700:hover { color: #9F1239; }
+      
+      /* Ink Colors */
+      .bg-ink-50 { background-color: #F8FAFC; }
+      .bg-ink-900 { background-color: #0F172A; }
+      .text-ink-300 { color: #CBD5E1; }
+      .text-ink-400 { color: #94A3B8; }
+      .text-ink-500 { color: #64748B; }
+      .text-ink-700 { color: #334155; }
+      .text-ink-800 { color: #1E293B; }
+      .text-ink-900 { color: #0F172A; }
+      .border-ink-100 { border-color: #F1F5F9; }
+      .border-ink-200 { border-color: #E2E8F0; }
+      .border-ink-800 { border-color: #1E293B; }
     </style>
-    <script type="importmap">
-    {"imports":{"react/":"https://aistudiocdn.com/react@^19.2.0/","react":"https://aistudiocdn.com/react@^19.2.0","react-router-dom":"https://aistudiocdn.com/react-router-dom@^7.9.5","react-dom/":"https://aistudiocdn.com/react-dom@^19.2.0/"}}
-    </script>
-    <link rel="stylesheet" href="/index.css" />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <!-- Script ini yang akan menjalankan React Anda -->
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>
