@@ -33,11 +33,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return true;
   };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout: () => supabase.auth.signOut(), loading }}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, login, logout: () => supabase.auth.signOut(), loading }}>{!loading && children}</AuthContext.Provider>;
 };
 
 const ArticleProvider = ({ children }: { children: React.ReactNode }) => {
@@ -48,27 +44,23 @@ const ArticleProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
   useEffect(() => { fetchArticles(); }, [fetchArticles]);
 
-  return (
-    <ArticleContext.Provider value={{ articles, fetchArticles }}>
-      {children}
-    </ArticleContext.Provider>
-  );
+  return <ArticleContext.Provider value={{ articles, fetchArticles }}>{children}</ArticleContext.Provider>;
 };
 
 // --- COMPONENTS ---
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
   return (
-    <header className="bg-white border-b p-4 sticky top-0 z-50">
+    <header className="bg-white border-b p-4 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link to="/" className="font-serif text-3xl text-red-600 font-bold tracking-tighter">ISD NEWS</Link>
+        <Link to="/" className="font-serif text-3xl text-red-600 font-bold tracking-tighter hover:opacity-80 transition-opacity">ISD NEWS</Link>
         <div className="flex gap-4 items-center">
           {user ? (
             <div className="flex gap-4 items-center">
-              <Link to="/dashboard" className="text-sm font-bold bg-gray-100 px-3 py-1.5 rounded-lg flex items-center gap-1"><LayoutDashboard size={16}/> Dashboard</Link>
-              <button onClick={logout} className="text-red-500 font-medium text-sm"><LogOut size={18}/></button>
+              <Link to="/dashboard" className="text-sm font-bold bg-gray-100 px-3 py-1.5 rounded-lg flex items-center gap-1 hover:bg-gray-200"><LayoutDashboard size={16}/> Dashboard</Link>
+              <button onClick={logout} className="text-red-500 font-medium text-sm hover:text-red-700"><LogOut size={18}/></button>
             </div>
-          ) : <Link to="/login" className="bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-bold">Masuk</Link>}
+          ) : <Link to="/login" className="bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-red-700 transition-colors">Masuk</Link>}
         </div>
       </div>
     </header>
@@ -82,13 +74,13 @@ const HomePage = () => {
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-2xl font-serif font-bold mb-8 border-b-2 border-red-600 inline-block pb-1">Berita Terbaru</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {articles.length === 0 && <p className="text-gray-400 italic">Belum ada berita...</p>}
+        {articles.length === 0 && <p className="text-gray-400 italic">Sedang memuat berita atau database kosong...</p>}
         {articles.map((a: any) => (
           <Link key={a.id} to={`/artikel/${a.slug}`} className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all group">
-            <div className="h-48 overflow-hidden"><img src={a.image_url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" /></div>
+            <div className="h-48 overflow-hidden bg-gray-100"><img src={a.image_url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onError={(e:any)=>e.target.src='https://picsum.photos/seed/news/800/500'} /></div>
             <div className="p-4">
               <h3 className="font-bold text-lg leading-tight group-hover:text-red-600 transition-colors">{a.title}</h3>
-              <p className="text-xs text-gray-400 mt-4 uppercase font-bold tracking-widest">{a.author_name}</p>
+              <p className="text-xs text-gray-400 mt-4 uppercase font-bold tracking-widest">{a.author_name} • {new Date(a.created_at).toLocaleDateString()}</p>
             </div>
           </Link>
         ))}
@@ -116,8 +108,8 @@ const LoginPage = () => {
         <h2 className="text-2xl font-bold text-center font-serif text-gray-800">Masuk Redaksi</h2>
         <input name="email" type="email" placeholder="Email" required className="w-full border p-3 rounded-xl outline-none focus:ring-2 focus:ring-red-500" />
         <input name="password" type="password" placeholder="Password" required className="w-full border p-3 rounded-xl outline-none focus:ring-2 focus:ring-red-500" />
-        <button type="submit" disabled={loading} className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-colors">
-          {loading ? "Memuat..." : "Masuk Sekarang"}
+        <button type="submit" disabled={loading} className="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-colors disabled:bg-gray-400">
+          {loading ? "Memverifikasi..." : "Masuk Sekarang"}
         </button>
       </form>
     </div>
@@ -136,7 +128,7 @@ const DashboardPage = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold font-serif">Dashboard</h1>
-          <p className="text-sm text-gray-500 mt-1">Kelola berita Anda di sini.</p>
+          <p className="text-sm text-gray-500 mt-1">Halo, {user.email}. Kelola berita Anda di sini.</p>
         </div>
         <Link to="/tulis" className="bg-red-600 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-red-200 hover:bg-red-700"><PlusCircle size={20}/> Tulis Berita</Link>
       </div>
@@ -156,9 +148,7 @@ const DashboardPage = () => {
                       await supabase.from('articles').delete().eq('id', a.id); 
                       fetchArticles(); 
                     } 
-                  }} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
-                    <Trash2 size={20}/>
-                  </button>
+                  }} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"><Trash2 size={20}/></button>
                 </td>
               </tr>
             ))}
@@ -174,23 +164,23 @@ const ArticleDetailPage = () => {
   const { articles } = useContext(ArticleContext);
   const a = articles.find((art: any) => art.slug === slug);
 
-  if (!a) return <div className="p-20 text-center font-bold">Berita tidak ditemukan. <br/><Link to="/" className="text-red-600">Kembali ke Beranda</Link></div>;
+  if (!a) return <div className="p-20 text-center font-bold">Berita tidak ditemukan. <br/><Link to="/" className="text-red-600 hover:underline">Kembali ke Beranda</Link></div>;
 
   return (
     <div className="max-w-3xl mx-auto p-6 py-12">
-      <div className="mb-8">
+      <div className="mb-8 text-center md:text-left">
         <span className="text-red-600 font-bold text-xs uppercase tracking-[0.3em]">Portal Berita ISD NEWS</span>
         <h1 className="text-4xl md:text-5xl font-bold font-serif leading-tight mt-4 text-gray-900">{a.title}</h1>
-        <div className="mt-6 flex items-center gap-3 text-sm text-gray-500">
-          <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center font-bold text-red-600">ISD</div>
-          <div>
-            <p className="font-bold text-gray-800 uppercase">{a.author_name}</p>
-            <p>{new Date(a.created_at).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <div className="mt-6 flex items-center justify-center md:justify-start gap-3 text-sm text-gray-500">
+          <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center font-bold text-white shadow-lg">ISD</div>
+          <div className="text-left">
+            <p className="font-bold text-gray-800 uppercase leading-none">{a.author_name}</p>
+            <p className="text-xs">{new Date(a.created_at).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
         </div>
       </div>
-      <img src={a.image_url} className="w-full rounded-3xl mb-12 shadow-2xl" />
-      <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed whitespace-pre-line font-serif italic">
+      <img src={a.image_url} className="w-full rounded-3xl mb-12 shadow-2xl border" onError={(e:any)=>e.target.src='https://picsum.photos/seed/news/800/500'} />
+      <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed whitespace-pre-line font-serif italic bg-white p-8 rounded-2xl border shadow-sm">
         {a.content}
       </div>
     </div>
@@ -249,21 +239,23 @@ export default function App() {
     <AuthProvider>
       <ArticleProvider>
         <BrowserRouter>
-          <Header />
-          <main className="min-h-screen">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/tulis" element={<SubmitPage />} />
-              <Route path="/artikel/:slug" element={<ArticleDetailPage />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </main>
-          <footer className="bg-white border-t p-12 text-center">
-            <p className="font-serif text-2xl text-red-600 font-bold mb-2">ISD NEWS</p>
-            <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">&copy; 2026 Portal Berita Mandiri | By Imam Sahroni Darmawan, S.T</p>
-          </footer>
+          <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+            <Header />
+            <main className="flex-grow">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/tulis" element={<SubmitPage />} />
+                <Route path="/artikel/:slug" element={<ArticleDetailPage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </main>
+            <footer className="bg-white border-t p-12 text-center">
+              <p className="font-serif text-2xl text-red-600 font-bold mb-2">ISD NEWS</p>
+              <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">&copy; 2026 Portal Berita Mandiri | By Imam Sahroni Darmawan, S.T</p>
+            </footer>
+          </div>
         </BrowserRouter>
       </ArticleProvider>
     </AuthProvider>
