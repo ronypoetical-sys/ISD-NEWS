@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext, useContext, useCallback } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, Navigate } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js';
-import { Trash2, LayoutDashboard, LogOut, PlusCircle, ChevronRight } from 'lucide-react';
+import { Trash2, LayoutDashboard, LogOut, PlusCircle, FileText, ChevronRight } from 'lucide-react';
 
 const SUPABASE_URL = 'https://voukghjtxmlylqgxcep.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvdWtnaGp0eG1sYnlscWd4Y2VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5ODk0MzUsImV4cCI6MjA4OTU2NTQzNX0.zdI2xhxXF-V6rMbi0TpuM90oldAbogrZxpBi7rt01Mc';
@@ -33,7 +33,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return true;
   };
 
-  return <AuthContext.Provider value={{ user, login, logout: () => supabase.auth.signOut(), loading }}>{!loading && children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, login, logout: () => supabase.auth.signOut(), loading }}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 
 const ArticleProvider = ({ children }: { children: React.ReactNode }) => {
@@ -44,7 +48,11 @@ const ArticleProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
   useEffect(() => { fetchArticles(); }, [fetchArticles]);
 
-  return <ArticleContext.Provider value={{ articles, fetchArticles }}>{children}</ArticleContext.Provider>;
+  return (
+    <ArticleContext.Provider value={{ articles, fetchArticles }}>
+      {children}
+    </ArticleContext.Provider>
+  );
 };
 
 // --- COMPONENTS ---
@@ -143,7 +151,14 @@ const DashboardPage = () => {
               <tr key={a.id} className="border-b last:border-0 hover:bg-gray-50 transition-colors">
                 <td className="p-4 font-bold text-gray-700">{a.title}</td>
                 <td className="p-4 flex justify-center gap-2">
-                  <button onClick={async () => { if(confirm("Hapus berita ini permanen?")) { await supabase.from('articles').delete().eq('id', a.id); fetchArticles(); } }} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"><Trash2 size={20}/></button>
+                  <button onClick={async () => { 
+                    if(confirm("Hapus berita ini permanen?")) { 
+                      await supabase.from('articles').delete().eq('id', a.id); 
+                      fetchArticles(); 
+                    } 
+                  }} className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
+                    <Trash2 size={20}/>
+                  </button>
                 </td>
               </tr>
             ))}
